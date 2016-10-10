@@ -1,3 +1,5 @@
+import sys
+
 def init_dict():
     num_dict={}
     low_dict={}
@@ -73,6 +75,7 @@ def main():
     scrambler3=scramble(scrambler3[0],numlist3)
     print "Enter string to enter the ENIGMA"
     plaintext=raw_input().upper()
+    print(chr(27) + "[2J")
     y=0
     ciphertext=""
     while y<len(plaintext):
