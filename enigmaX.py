@@ -20,28 +20,29 @@ class Engine():
         self.scrambler3 = Scrambler(start3)
         self.reflector = Reflector()
         self.counter = 1
-        print self.run("testfoo")
-        print self.run("RWYRDMM")
+        print self.run("hello this is a message from earth I really like the way that we have fun")
+        print self.run("ZCZJU NVTH KL Z GGCKQDM ZQNN QUHWG H YDKRJQ SGSG LPH KGA HAIJ ZG ZCDD EGU")
 
     def translate(self, char):
         x = self.scrambler1._rev_dict[self.scrambler2._rev_dict[self.scrambler3._rev_dict[self.reflector._dict[self.scrambler3._dict[self.scrambler2._dict[self.scrambler1._dict[char]]]]]]]
-        """
         self.scrambler1.increment()
         if self.counter % 26 == 0:
             self.scrambler2.increment()
             if self.counter % 52 == 0:
                 self.scrambler3.increment()
-        """
         return x
 
     def run(self, plaintext):
         ciphertext = ''
         for i in range(0, len(plaintext)):
-            ciphertext += self.translate(plaintext[i].upper())
-            self.counter += 1
-        self.counter = 0
-        #self.scrambler1.reset()
-        #self.scrambler2.reset()
-        #self.scrambler3.reset()
+            if plaintext[i] != ' ':
+                ciphertext += self.translate(plaintext[i].upper())
+                self.counter += 1
+            else:
+                ciphertext +=  ' '
+        self.counter = 1
+        self.scrambler1.reset()
+        self.scrambler2.reset()
+        self.scrambler3.reset()
         return ciphertext
 e = Engine()
