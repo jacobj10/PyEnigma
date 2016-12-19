@@ -13,3 +13,6 @@ class Reflector():
             self._dict[chr(self.reflector_list[x+1]+64)]=chr(self.reflector_list[x]+64)
             x+=2
         return self._dict
+    
+    def letters(self):
+        return [chr(i + 64) for i in self.reflector_list]

@@ -15,10 +15,14 @@ class EnigmaX():
         self.window = self.builder.get_object('windowMain')
         self.textBox = self.builder.get_object('entry')
         self.label = self.builder.get_object('label')
+        self.label2 = self.builder.get_object('enigma')
+        self.engineToString()
 
         self.textBox.connect('activate', self.signal_text_activate)
         self.textBox.connect('changed', self.signal_text_changed)
         self.window.connect('destroy', self.signal_window_destroy)
+
+        self.ciphertext = ''
 
         self.window.show_all()
     
@@ -28,9 +32,16 @@ class EnigmaX():
 
     def signal_text_activate(self, *args):
         self.label.set_text(self.engine.run(self.textBox.get_text()))
+        self.engineToString()
     
     def signal_text_changed(self, *args):
-        pass
+        newChar = self.textBox.get_text()[-1] if len(self.textBox.get_text()) else ''
+        self.ciphertext += self.engine.translate(newChar.upper())
+        self.label.set_text(self.ciphertext)
+        self.engineToString()
+    
+    def engineToString(self):
+        self.label2.set_text(self.engine.toString())
 
 e = EnigmaX()
 Gtk.main()
